@@ -44,10 +44,8 @@ following command. This command will also compute the classifier on the given da
 python3 compute_classifier.py -n MYNAME.h5 -gdbo True
 ``` 
 
-The results are stored in the folder "predictions", by default in a h5 format, on a dataset of size `(nb_of_chunks, 527)`. To 
-find the index of the sound class you want, please check the file `pann_classes.xlsx` which contains the correspondance 
-between the Audioset sound sources name and the output index of PANNs.
-If you want to store it as a .npy file instead, please run:
+The results are stored in the folder "predictions", under the name predictions_MYNAME.h5, by default in a h5 format. If the output is chosen to be a h5 file, it contains a dataset named "predictions" of size `(nb_of_chunks, 527)`. To find the index of the sound class you want, please check the file `pann_classes.xlsx` which contains the correspondance between the Audioset sound sources name and the output index of PANNs.
+If you want to store it as a .npy file instead of a .h5 file, please run:
 
 ```
 python3 compute_classifier.py -n MYNAME.h5 -dbo -90 -of npy
