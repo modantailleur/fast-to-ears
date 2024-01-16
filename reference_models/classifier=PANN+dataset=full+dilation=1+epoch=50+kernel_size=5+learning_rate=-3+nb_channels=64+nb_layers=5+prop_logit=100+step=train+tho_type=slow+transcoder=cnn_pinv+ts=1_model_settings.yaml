@@ -1,0 +1,48 @@
+batch_size: 16
+cnn_dilation: 1
+cnn_kernel_size: 5
+cnn_nb_channels: 64
+cnn_nb_layers: 5
+epochs: 50
+input_shape: !!python/tuple
+- 8
+- 64
+mels_type: PANN
+mlp_hl_1: null
+mlp_hl_2: null
+model_type: cnn_pinv
+output_shape: !!python/tuple
+- 1001
+- 64
+settings:
+  audio_dataset_name: TAU-urban-acoustic-scenes-2020-mobile-development
+  audio_dataset_path: "/media/user/MT-SSD-NEW/0-PROJETS_INFO/Th\xE8se"
+  dataset_name: Dcase-Task1-Full-slow
+  dataset_type: full
+  devices_keep:
+  - a
+  eval_ratio: 0.125
+  flen: 32758
+  hlen: 32000
+  index_scene:
+    airport: 0
+    bus: 1
+    metro: 2
+    metro_station: 3
+    park: 4
+    public_square: 5
+    shopping_mall: 6
+    street_pedestrian: 7
+    street_traffic: 8
+    tram: 9
+  mel_template: null
+  output_path: "/home/user/Documents/Th\xE8se/Code/2-ThirdOToMel-data/data"
+  root_dir: data
+  setting_data_path: "/home/user/Documents/Th\xE8se/Code/2-ThirdOToMel-data/data_settings"
+  split_by_city: false
+  sr: 32000
+  tho_freq: true
+  tho_time: true
+  tho_type: slow
+  train_ratio: 0.75
+  valid_ratio: 0.125
