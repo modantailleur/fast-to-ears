@@ -5,6 +5,9 @@ FAST-TO-EARS enables sound source predictions using fast third-octave recorded d
 Utilizing the transcoding method introduced in [1], it transcodes the third-octave spectro-temporal representations into fine-grained Mel spectrograms. 
 These spectrograms then serve as input for PANNs [2], which are large-scale pre-trained classifiers capable of predicting the presence of over 527 different sound sources. Consult the Audioset ontology [3] to identify the sound sources that best suit your project.
 
+To train a new model from scratch using different third-octave bands, please refer to the following repository:
+<https://github.com/modantailleur/paperSpectralTranscoder>
+
 ## SETUP
 
 First, install the required dependencies using the following command in a new Python 3.9.15 environment:
@@ -28,7 +31,7 @@ The npy array from the npy file, or the array from the h5 dataset, should be of 
 
 Examples of datasets with randomly generated fast third-octaves are given in test.npy and test.h5.
 
-A db offset should be specified by the user. As the PANN model is expecting normalized data as input, it is necessary 
+A dB offset should be specified by the user. As the PANN model is expecting normalized data as input, it is necessary 
 to specify an offset to make sure that the third-octave input is in a dBFS range. We leave the choice of the 
 dB offset entirely to the user. You can run the FAST-TO-EARS algorithm using a specific offset (e.g. -90) on your dataset using the 
 following command:
@@ -38,7 +41,7 @@ python3 compute_classifier.py -n MYNAME.h5 -dbo -90
 ```
 
 To have an idea of the db offset to use, we recommand using our dB offset calculation on a large dataset using the 
-following command. This command will also compute the classifier on the given dataset taking the calculated offset as db offset.
+following command. This command will also compute the classifier on the given dataset taking the calculated offset as dB offset.
 
 ```
 python3 compute_classifier.py -n MYNAME.h5 -gdbo True
@@ -66,3 +69,7 @@ python3 compute_classifier_from_audio.py example.wav
 [2] Kong, Q., Cao, Y., Iqbal, T., Wang, Y., Wang, W., & Plumbley, M. D. (2020). Panns: Large-scale pretrained audio neural networks for audio pattern recognition. IEEE/ACM Transactions on Audio, Speech, and Language Processing, 28, 2880-2894.
 
 [3] Gemmeke, J. F., Ellis, D. P., Freedman, D., Jansen, A., Lawrence, W., Moore, R. C., ... & Ritter, M. (2017, March). Audio set: An ontology and human-labeled dataset for audio events. In 2017 IEEE international conference on acoustics, speech and signal processing (ICASSP) (pp. 776-780). IEEE.
+
+## FUNDING
+
+This work is funded by the ANR projet AIBY4. More information at <https://aiby4.ls2n.fr/>.
