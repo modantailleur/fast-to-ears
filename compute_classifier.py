@@ -46,10 +46,7 @@ class TranscoderPANNEvaluater:
             spectral_data = spectral_data.type(self.dtype)
             spectral_data = spectral_data.to(device)
             
-            #The +26dB offset is due to the fact that the transcoder was not trained on dBFS but on dBFS + 26dB. This is 
-            #a bug in the training of the model but it doesn't affect the results as long as we make sure that the transcoder
-            #takes dBFS + 26dB as input
-            spectral_data = spectral_data + self.db_offset + 26
+            spectral_data = spectral_data + self.db_offset
 
             #If the third-octaves are less than 10s in length, then the entire third-octave bins are send to PANN as input.
             #If not, then only chunks of 10s frames are send to PANN as input. This is because PANN is most performant with 

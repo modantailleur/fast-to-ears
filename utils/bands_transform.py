@@ -276,7 +276,7 @@ class ThirdOctaveTransform():
 
     """
 
-    def __init__(self, sr, flen, hlen):
+    def __init__(self, sr, flen, hlen, db_delta=0):
         # Constants: process parameters
         self.sr = sr
         self.flen = flen
@@ -311,14 +311,8 @@ class ThirdOctaveTransform():
         # This should be deducted from outputs in wave_to_third_octave, but is instead covered by lvl_offset_db in data_loader
         self.corr_global = 20*np.log10(self.flen/np.sqrt(2))
 
-        # MT: nicolas ref sound pressure
-        # db_delta is related the the sensitivity of the microphone. For cense, the
-        # sensitivity is -26dB, so the db_delta is 26 (to add 26dB) to the given
-        # calculated value.
-        # This is actually a mistake tu put it there. Unfortunately, the CNN model has been trained
-        # with it for the Dcase paper: https://hal.science/hal-04178197v2/file/DCASE_2023___spectral_transcoder_camera_ready_14082023.pdf .
-        # This db_delta thus needs to be compensated on real third-octave recorded datasets when feeding the transcoder model with third-octaves.
-        self.db_delta = 26
+        #ref sound pressure: set to 0 for dBFS
+        self.db_delta = db_delta
 
         #just to contrast with the other third-octave transform
         self.mel_template = None

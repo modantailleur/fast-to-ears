@@ -205,24 +205,14 @@ def tukey_window(M, alpha=0.2):
     
     return(window, energy_correction)
 
-def get_transforms(sr=32000, flen=4096, hlen=4000, classifier='YamNet', device=torch.device("cpu"), tho_freq=True, tho_time=True, mel_template=None):
-    
-    if mel_template is None:
-        tho_tr = bt.ThirdOctaveTransform(sr=sr, flen=flen, hlen=hlen)
-        if classifier == 'PANN':
-            mels_tr = bt.PANNMelsTransform(flen_tho=tho_tr.flen, device=device)
-        if classifier == 'YamNet':
-            mels_tr = bt.YamNetMelsTransform(flen_tho=tho_tr.flen, device=device)
-        if classifier == 'default':
-            mels_tr = bt.DefaultMelsTransform(sr=tho_tr.sr, flen=tho_tr.flen, hlen=tho_tr.hlen)
-    else:
-        tho_tr = bt.NewThirdOctaveTransform(32000, 1024, 320, 64, mel_template=mel_template, tho_freq=tho_freq, tho_time=tho_time)
-        if classifier == 'PANN':
-            mels_tr = bt.PANNMelsTransform(flen_tho=4096, device=device)
-        if classifier == 'YamNet':
-            mels_tr = bt.YamNetMelsTransform(flen_tho=4096, device=device)
-        if classifier == 'default':
-            mels_tr = bt.DefaultMelsTransform(sr=tho_tr.sr, flen=4096, hlen=4000)
+def get_transforms(sr=32000, flen=4096, hlen=4000, classifier='YamNet', device=torch.device("cpu")):
+    tho_tr = bt.ThirdOctaveTransform(sr=sr, flen=flen, hlen=hlen, db_delta=0)
+    if classifier == 'PANN':
+        mels_tr = bt.PANNMelsTransform(flen_tho=tho_tr.flen, device=device)
+    if classifier == 'YamNet':
+        mels_tr = bt.YamNetMelsTransform(flen_tho=tho_tr.flen, device=device)
+    if classifier == 'default':
+        mels_tr = bt.DefaultMelsTransform(sr=tho_tr.sr, flen=tho_tr.flen, hlen=tho_tr.hlen)
     return(tho_tr, mels_tr)   
 
 #count the number of parameters of a model
